@@ -11,13 +11,14 @@ export function SettingsPage() {
   return (
     <div className="animate-fade-in">
       <h1 className="mb-6 font-display text-xl font-semibold text-ink-900">
-        Cài đặt
+        Settings
       </h1>
 
       <Card>
         <p className="text-sm font-medium text-ink-900">AI provider</p>
         <p className="mt-1 mb-4 text-sm text-ink-500">
-          Chọn dịch vụ AI dùng để tóm tắt và trích xuất action items.
+          Choose the AI service to use for summarizing and extracting action
+          items.
         </p>
 
         <div className="flex flex-col gap-2">

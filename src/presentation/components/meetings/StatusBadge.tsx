@@ -9,12 +9,18 @@ const config: Record<MeetingStatus, { label: string; classes: string }> = {
   failed: { label: "Failed", classes: "bg-rose-50 text-rose-700" },
 };
 
-export function StatusBadge({ status }: { status: MeetingStatus }) {
+export function StatusBadge({
+  status,
+  className = "",
+}: {
+  status: MeetingStatus;
+  className?: string;
+}) {
   const { label, classes } = config[status];
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${classes}`}
+      className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1 text-xs font-medium ${classes} ${className}`}
     >
       {status === "done" && <Check size={13} />}
       {status === "processing" && <Waveform size="sm" color="bg-amber-500" />}

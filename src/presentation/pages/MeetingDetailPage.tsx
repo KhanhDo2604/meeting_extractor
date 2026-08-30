@@ -6,21 +6,14 @@ import { Card } from "../components/ui/Card";
 import { Waveform } from "../components/ui/Waveform";
 import { ActionItemRow } from "../components/meetings/ActionItemRow";
 import { TranscriptPanel } from "../components/meetings/TranscriptPanel";
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("vi-VN", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-}
+import { formatDate } from "../utils/functions";
 
 export function MeetingDetailPage() {
   const { id } = useParams();
   const { meeting } = useMeetingById(id);
 
   if (!meeting) {
-    return <p className="text-sm text-ink-500">Không tìm thấy cuộc họp.</p>;
+    return <p className="text-sm text-ink-500">Meeting not found.</p>;
   }
 
   return (
@@ -30,26 +23,26 @@ export function MeetingDetailPage() {
         className="mb-4 inline-flex items-center gap-1.5 text-xs text-ink-500 hover:text-ink-900"
       >
         <ArrowLeft size={13} />
-        Quay lại danh sách
+        Back to meetings list
       </Link>
 
-      <div className="mb-6 flex items-start justify-between">
-        <div>
-          <h1 className="font-display text-xl font-semibold text-ink-900">
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="min-w-0">
+          <h1 className="truncate font-display text-xl font-semibold text-ink-900">
             {meeting.title}
           </h1>
           <p className="mt-1 text-sm text-ink-500">
-            {formatDate(meeting.createdAt)} · {meeting.durationMinutes} phút
+            {formatDate(meeting.createdAt)} · {meeting.durationMinutes} min
           </p>
         </div>
-        <StatusBadge status={meeting.status} />
+        <StatusBadge status={meeting.status} className="self-start" />
       </div>
 
       {meeting.status === "processing" && (
         <Card className="mb-4 flex items-center gap-3">
           <Waveform />
           <p className="text-sm text-ink-500">
-            Đang trích xuất summary và action items...
+            Extracting summary and action items...
           </p>
         </Card>
       )}
@@ -65,7 +58,7 @@ export function MeetingDetailPage() {
       {meeting.summary && (
         <Card className="mb-4">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-ink-500">
-            Tóm tắt
+            Summary
           </p>
           <p className="text-sm leading-relaxed text-ink-900">
             {meeting.summary}

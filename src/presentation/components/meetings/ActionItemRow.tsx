@@ -1,14 +1,7 @@
 import { useState } from "react";
 import { Check } from "lucide-react";
 import type { ActionItem } from "../../../entities/Meeting";
-
-function formatDeadline(deadline: string | null) {
-  if (!deadline) return null;
-  return new Date(deadline).toLocaleDateString("vi-VN", {
-    day: "2-digit",
-    month: "short",
-  });
-}
+import { formatDate } from "../../utils/functions";
 
 export function ActionItemRow({ item }: { item: ActionItem }) {
   const [isDone, setIsDone] = useState(item.isDone);
@@ -33,7 +26,9 @@ export function ActionItemRow({ item }: { item: ActionItem }) {
       </p>
       <span className="shrink-0 text-xs text-ink-500">
         {item.owner}
-        {item.deadline && <> · {formatDeadline(item.deadline)}</>}
+        {item.deadline && (
+          <> · {formatDate(item.deadline, { includeYear: false })}</>
+        )}
       </span>
     </div>
   );

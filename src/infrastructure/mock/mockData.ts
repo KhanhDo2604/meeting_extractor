@@ -91,6 +91,6 @@ export const mockMeetings: Meeting[] = [
     summary: null,
     transcript: null,
     actionItems: [],
-    errorMessage: "Whisper service không phản hồi",
+    errorMessage: "Whisper service not responding",
   },
 ];

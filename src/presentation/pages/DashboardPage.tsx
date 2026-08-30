@@ -12,13 +12,13 @@ export function DashboardPage() {
 
   return (
     <div className="animate-fade-in">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
+      <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
           <h1 className="font-display text-xl font-semibold text-ink-900">
-            Cuộc họp
+            Meetings
           </h1>
           <p className="mt-0.5 text-sm text-ink-500">
-            {meetings.length} cuộc họp gần đây
+            {meetings.length} recent meetings
           </p>
         </div>
         {!isEmpty && (
@@ -26,8 +26,9 @@ export function DashboardPage() {
             variant="primary"
             icon={<Upload size={16} />}
             onClick={() => setUploadOpen(true)}
+            className="w-full whitespace-nowrap sm:w-auto"
           >
-            Upload cuộc họp mới
+            Upload new meeting
           </Button>
         )}
       </div>

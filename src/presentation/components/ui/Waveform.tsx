@@ -19,7 +19,7 @@ export function Waveform({
     <div
       className={`flex items-end gap-0.5 ${height}`}
       role="img"
-      aria-label="Đang xử lý audio"
+      aria-label="Processing audio"
     >
       {heights.map((h, i) => (
         <span

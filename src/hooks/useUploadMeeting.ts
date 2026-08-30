@@ -20,11 +20,14 @@ export function useUploadMeeting(onSuccess: () => void) {
 
   function setFile(file: File | null) {
     if (file && !ACCEPTED_TYPES.includes(file.type)) {
-      setState((s) => ({ ...s, error: "Chỉ hỗ trợ file MP3, WAV, M4A." }));
+      setState((s) => ({
+        ...s,
+        error: "Only MP3, WAV, and M4A files are supported.",
+      }));
       return;
     }
     if (file && file.size > MAX_SIZE_MB * 1024 * 1024) {
-      setState((s) => ({ ...s, error: `File vượt quá ${MAX_SIZE_MB}MB.` }));
+      setState((s) => ({ ...s, error: `File exceeds ${MAX_SIZE_MB}MB.` }));
       return;
     }
     setState((s) => ({ ...s, file, error: null }));
@@ -36,7 +39,7 @@ export function useUploadMeeting(onSuccess: () => void) {
 
   async function submit() {
     if (!state.file) {
-      setState((s) => ({ ...s, error: "Vui lòng chọn một file audio." }));
+      setState((s) => ({ ...s, error: "Please select an audio file." }));
       return;
     }
     setState((s) => ({ ...s, isSubmitting: true, error: null }));
